@@ -59,9 +59,8 @@ class Socket
     close: =>
         clsocket.cls_close @descriptor
 
-    pending: (sck, timeout) ->
-        if type sck ~= 'number' then sck = sck.socket
-        selc = clsocket.cls_pending sck, timeout
+    pending: (timeout) =>
+        selc = clsocket.cls_pending @descriptor, timeout
         if selc == 1 then error 'error select'
         return selc == 0
 

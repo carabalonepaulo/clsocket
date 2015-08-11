@@ -67,11 +67,8 @@ do
     close = function(self)
       return clsocket.cls_close(self.descriptor)
     end,
-    pending = function(sck, timeout)
-      if type(sck ~= 'number') then
-        sck = sck.socket
-      end
-      local selc = clsocket.cls_pending(sck, timeout)
+    pending = function(self, timeout)
+      local selc = clsocket.cls_pending(self.descriptor, timeout)
       if selc == 1 then
         error('error select')
       end
