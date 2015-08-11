@@ -1,3 +1,3 @@
 # clsocket
-Simples biblioteca de socket para Windows.
-Possui funcionalidades básicas, para o funcionamento.
+Biblioteca simples de socket para Windows.
+Possui apenas funcionalidades básicas
