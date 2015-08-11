@@ -18,7 +18,10 @@ clsocket = ffi.load 'clsocket.dll'
 
 class Socket
     new: (af, ty, family) =>
-        @descriptor = clsocket.cls_socket(af, ty, family)
+    	if af ~= nil and ty == nil and family == nil
+    		@descriptor = af
+    	else
+    		@descriptor = clsocket.cls_socket(af, ty, family)
         if @descriptor == 1 then error 'error socket'
 
     connect: (host, port, family = nil) =>
@@ -34,9 +37,9 @@ class Socket
         if listen == 1 then error 'error listen'
 
     accept: =>
-        sck = clsocket.cls_accept!
+        sck = clsocket.cls_accept @descriptor
         if sck == 1 then error 'error accept'
-        return sck
+        return Socket sck, nil, nil
 
     send: (message) =>
         send = clsocket.cls_send @descriptor, message
@@ -46,7 +49,7 @@ class Socket
         buff = ffi.new 'char[?]', len
         recv = clsocket.cls_receive @descriptor, buff, len
         if recv == 1 then error 'error receive'
-        return ffi.string(buff)
+        return ffi.string(buff)\sub 0, len
 
     avaliable: =>
         av = clsocket.cls_avaliable @descriptor

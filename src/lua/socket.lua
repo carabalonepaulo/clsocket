@@ -37,11 +37,11 @@ do
       end
     end,
     accept = function(self)
-      local sck = clsocket.cls_accept()
+      local sck = clsocket.cls_accept(self.descriptor)
       if sck == 1 then
         error('error accept')
       end
-      return sck
+      return Socket(sck, nil, nil)
     end,
     send = function(self, message)
       local send = clsocket.cls_send(self.descriptor, message)
@@ -55,7 +55,7 @@ do
       if recv == 1 then
         error('error receive')
       end
-      return ffi.string(buff)
+      return ffi.string(buff):sub(0, len)
     end,
     avaliable = function(self)
       local av = clsocket.cls_avaliable(self.descriptor)
@@ -81,7 +81,11 @@ do
   _base_0.__index = _base_0
   local _class_0 = setmetatable({
     __init = function(self, af, ty, family)
-      self.descriptor = clsocket.cls_socket(af, ty, family)
+      if af ~= nil and ty == nil and family == nil then
+        self.descriptor = af
+      else
+        self.descriptor = clsocket.cls_socket(af, ty, family)
+      end
       if self.descriptor == 1 then
         return error('error socket')
       end
@@ -99,4 +103,6 @@ do
   _base_0.__class = _class_0
   Socket = _class_0
 end
-return { Socket = Socket }
+return {
+  Socket = Socket
+}
