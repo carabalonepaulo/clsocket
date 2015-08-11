@@ -99,7 +99,4 @@ do
   _base_0.__class = _class_0
   Socket = _class_0
 end
-return {
-  Socket = Socket,
-  AsyncTcpServer = AsyncTcpServer
-}
+return { Socket = Socket }
