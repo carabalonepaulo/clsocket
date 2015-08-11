@@ -62,4 +62,4 @@ class Socket
         if selc == 1 then error 'error select'
         return selc == 0
 
-{ :Socket, :AsyncTcpServer }
+{ :Socket }
