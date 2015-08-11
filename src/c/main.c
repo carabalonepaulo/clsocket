@@ -53,7 +53,7 @@ int DLL_EXPORT cls_listen(SOCKET s, int backlog) {
     return 0;
 }
 
-int DLL_EXPORT cls_select(SOCKET s, int tmout) {
+int DLL_EXPORT cls_pending(SOCKET s, int tmout) {
     fd_set readfds;
     FD_ZERO(&readfds);
     FD_SET(s, &readfds);

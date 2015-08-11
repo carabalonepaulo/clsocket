@@ -4,7 +4,7 @@ ffi.cdef([[    typedef long SOCKET;
     int cls_connect(SOCKET s, const char * host, int port, int family);
     int cls_bind(SOCKET s, const char * host, int port);
     int cls_listen(SOCKET s, int backlog);
-    int cls_select(SOCKET s, int tmout);
+    int cls_pending(SOCKET s, int tmout);
     SOCKET cls_accept(SOCKET s);
     int cls_send(SOCKET s, const char * message);
     int cls_avaliable(SOCKET s);
@@ -67,11 +67,11 @@ do
     close = function(self)
       return clsocket.cls_close(self.descriptor)
     end,
-    select = function(sck, timeout)
+    pending = function(sck, timeout)
       if type(sck ~= 'number') then
         sck = sck.socket
       end
-      local selc = clsocket.cls_select(sck, timeout)
+      local selc = clsocket.cls_pending(sck, timeout)
       if selc == 1 then
         error('error select')
       end
