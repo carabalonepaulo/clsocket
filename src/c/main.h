@@ -16,7 +16,7 @@ int DLL_EXPORT cls_listen(SOCKET s, int backlog);
 int DLL_EXPORT cls_pending(SOCKET s, int tmout);
 SOCKET DLL_EXPORT cls_accept(SOCKET s);
 int DLL_EXPORT cls_send(SOCKET s, const char * message);
-int DLL_EXPORT cls_avaliable(SOCKET s);
+int DLL_EXPORT cls_available(SOCKET s);
 int DLL_EXPORT cls_receive(SOCKET s, char * buffer, int len);
 int DLL_EXPORT cls_close(SOCKET s);
 
