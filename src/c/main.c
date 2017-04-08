@@ -80,6 +80,7 @@ SOCKET DLL_EXPORT cls_accept(SOCKET s) {
         WSACleanup();
         return 1;
     }
+    return acp;
 }
 
 int DLL_EXPORT cls_send(SOCKET s, const char * message) {
@@ -90,7 +91,7 @@ int DLL_EXPORT cls_send(SOCKET s, const char * message) {
     return 0;
 }
 
-int DLL_EXPORT cls_avaliable(SOCKET s) {
+int DLL_EXPORT cls_available(SOCKET s) {
     u_long n = -1;
     if (ioctlsocket(s, FIONREAD, &n) < 0) {
         WSACleanup();
